@@ -3,7 +3,7 @@ About
 
 > "Teach a man to fish, and you feed him for a day. Teach a data scientist to
 > wrap a a model in a JSON REST API endpoint inside a Docker container, and you
-> feed him for life."
+> feed them for life."
 
 Install
 -------
