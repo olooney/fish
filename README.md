@@ -96,15 +96,15 @@ You may also find it useful (for debugging) to run a shell inside the container:
 
 
 
-Sprint Backlog
---------------
+Hackathon Backlog
+-----------------
 
-- [ ] model class
-- [ ] test model
-- [ ] unit tests
-- [ ] add API
-- [ ] pydantic types
-- [ ] unit tests
+- [X] model class
+- [X] test model
+- [X] unit tests
+- [X] add API
+- [X] pydantic types
+- [X] unit tests
 - [X] Dockerfile
 
 
@@ -113,7 +113,7 @@ Backlog
 
 - [ ] Authentication?
 - [ ] DEV/PROD flags?
-- [ ] Bulk Inference?
+- [X] Bulk Inference?
 - [ ] CLI?
 - [ ] Logging?
 
