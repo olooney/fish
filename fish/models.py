@@ -32,9 +32,13 @@ class MoonModel:
 
         return cls(data)
 
-    def predict(self, x: float, y: float) -> int:
+    def predict(self, x: float, y: float) -> (int, float):
         X = np.array([ [x, y] ])
         Y = self._model.predict(X)
-        return Y[0].item()
+        P = self._model.predict_proba(X)
+        code = Y[0].item()
+        probability = P[0][code].item()
+        return code, probability
+
 
 
