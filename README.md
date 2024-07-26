@@ -88,7 +88,7 @@ On my machine this builds a 232 MB image, which is fairly light.
 
 If the build was successful, you can run the image as a server with:
 
-    docker run --rm -p 8000:8000 olooney/fish
+    docker run --rm -e OPENAI_API_KEY=secret -p 8000:8000 olooney/fish
 
 You may also find it useful (for debugging) to run a shell inside the container:
 

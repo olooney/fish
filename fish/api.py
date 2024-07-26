@@ -1,8 +1,9 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import HTMLResponse
 import pydantic
-from typing import List
+from typing import List, Dict, Any
 from .models import MoonModel, MOON_LABELS, MOON_COLORS
+from .agents import tabulate
 from .version import __version__
 from datetime import datetime
 import pkgutil
@@ -38,6 +39,14 @@ class MoonResponse(pydantic.BaseModel):
 
 class MoonBatchResponse(pydantic.BaseModel):
     result: List[MoonResult]
+    version: str
+    timestamp: str
+
+class TabulateRequest(pydantic.BaseModel):
+    text: str
+
+class TabulateResponse(pydantic.BaseModel):
+    result: List[Dict[str, Any]]
     version: str
     timestamp: str
 
@@ -100,3 +109,13 @@ def get_evaluation():
     report_html = report_bytes.decode('utf-8')
     
     return HTMLResponse(content=report_html)
+
+
+@app.post("/agent/tabulate", response_model=TabulateResponse)
+def tabulate_endpoint(request: TabulateRequest):
+    result = tabulate(request.text)
+    return TabulateResponse(
+        result=result,
+        version=__version__,
+        timestamp=datetime.now().isoformat(),
+    )

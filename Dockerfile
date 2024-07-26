@@ -17,6 +17,7 @@ COPY . .
 # which encourages people to use venv for local python packages. That's not
 # important here because we're installing python from scratch and it will only
 # ever be used to run this one command.
+RUN pip install --break-system-packages -r requirements.txt
 RUN pip install . --break-system-packages
 
 # Create a non-root user

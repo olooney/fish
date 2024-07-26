@@ -17,7 +17,7 @@ setup(
     python_requires=">=3.11",
     packages=["fish"],
     package_data={
-        "fish": ["data/*.json"],
+        "fish": ["data/*"],
     },
     install_requires=[
         "fastapi",
