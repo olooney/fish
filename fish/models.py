@@ -1,8 +1,10 @@
-import json
+from io import BytesIO
+import joblib
 import pkgutil
 from typing import Iterable, Dict, Union
 from enum import Enum
 import pydantic
+import numpy as np
 
 
 MOON_LABELS = ["Blue", "Orange"]
@@ -16,19 +18,23 @@ class GenderCategory(Enum):
 
 
 class MoonModel:
-    def __init__(self, model_data):
-        self.data = model_data
+    def __init__(self, data):
+        self._model = data
 
     @classmethod
     def load(cls, filename: str = None):
         if filename is None:
-            raw_data = pkgutil.get_data("fish", "data/data.json")
-            data = json.loads(raw_data.decode("utf-8"))
+            raw_data = pkgutil.get_data("fish", "data/moon_model.v1.joblib")
+            file = BytesIO(raw_data)
+            data = joblib.load(file)
         else:
-            with open(filename) as file:
-                data = json.load(file)
+            data = joblib.load(filename)
 
         return cls(data)
 
     def predict(self, x: float, y: float) -> int:
-        return 0 if x + y < 1 else 1
+        X = np.array([ [x, y] ])
+        Y = self._model.predict(X)
+        return Y[0].item()
+
+
